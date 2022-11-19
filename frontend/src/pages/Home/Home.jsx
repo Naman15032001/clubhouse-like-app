@@ -15,7 +15,7 @@ const Home = () => {
 
     const history = useHistory();
     function startRegister() {
-        history.push('/register');
+        history.push('/authenticate');
         //console.log('clicked');
     }
 
@@ -26,11 +26,10 @@ const Home = () => {
 
                 </p>
                 <div>
-                    <Button onClick={startRegister} text="Get your username" />
+                    <Button onClick={startRegister} text="Lets go" />
                 </div>
                 <div className={styles.siginWrapper}>
                     <span className={styles.hasInvite}>Have an invite text?</span>
-                    <Link style={signInLinkStyle} to="/login">Sign In</Link>
                 </div>
             </Card>
         </div>
