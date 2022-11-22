@@ -1,6 +1,7 @@
 const hashService = require("../services/hash-service");
 const otpService = require("../services/otp-service");
 const userService = require("../services/user-service");
+const tokenService = require("../services/token-service");
 
 
 class AuthController {
@@ -78,10 +79,6 @@ class AuthController {
 
         let user;
 
-        let accessToken;
-
-        let refreshToken;
-
         try {
             user = await userService.findUser({
                 phone
@@ -98,6 +95,23 @@ class AuthController {
                 message: "Server error"
             })
         }
+
+        let {
+            accessToken,
+            refreshToken
+        } = tokenService.generateTokens({
+            _id: user._id,
+            activated: false
+        });
+
+        res.cookie('refreshtoken', refreshToken, {
+            maxAge: 1000 * 60 * 60 * 24 * 30,
+            httpOnly: true
+        })
+
+        res.json({
+            accessToken
+        })
 
 
 
