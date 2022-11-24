@@ -10,8 +10,9 @@ const userSchema = new Schema({
 
     activated: {
         type: Boolean,
-        required: false
-    }
+        required: false,
+        default: false
+    },
 }, {
     timestamps: true
 });
